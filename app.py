@@ -10,11 +10,11 @@ st.title('Una silla al sol 🪑 ☀️')
 st.subheader('Encuentra una terraza en Madrid que le esté dando el Sol.')
 
 
-
 # Leer el archivo Excel
 df_resultado_sol = pd.read_excel("./data/solysombra.xlsx")  # Suponiendo que el archivo está en el mismo directorio
 gdf = pd.read_excel("./data/gdf_terraza.xlsx")
 df_resultado_sol = pd.merge(df_resultado_sol, gdf[['ID_ESTABLECIMIENTO', 'lat', 'lon', 'Nombre']], on='ID_ESTABLECIMIENTO', how='left')
+
 
 hora = st.slider(
     "Hora:", value=(time(11, 30), time(12, 45))
@@ -34,12 +34,11 @@ chart_data_grouped = df_filtrado.groupby(['lat', 'lon', 'Nombre'])['N_MESA'].nun
 chart_data_grouped['mesas'] = chart_data_grouped['N_MESA'] 
 
 
-
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
-            latitude=40.454015, 
+            latitude=40.44, 
             longitude=-3.694968,
             zoom=13,
             pitch=50,
@@ -50,7 +49,7 @@ st.pydeck_chart(
                 data=chart_data_grouped,
                 get_position="[lon, lat]",
                 get_color="[255, 211, 0, 255]",
-                get_radius=75,
+                get_radius=35,
                 pickable=True,  # Permite seleccionar puntos en el mapa
             ),
         ],
