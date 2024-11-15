@@ -8,7 +8,7 @@ __pycache__/
 
 # Data
 
-data/
+# data/ comento para hacer una prueba DESCOMENTAR
 
 # Distribution / packaging
 .Python
