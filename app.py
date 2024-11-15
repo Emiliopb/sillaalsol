@@ -18,7 +18,10 @@ df_resultado_sol = pd.merge(df_resultado_sol, gdf[['ID_ESTABLECIMIENTO', 'lat', 
 
 
 hora = st.slider(
-    "Hora:", value=(time(11, 30), time(12, 45))
+    "Selecciona el rango de hora:",
+    min_value=time(6, 0),  # 6:00 a.m.
+    max_value=time(22, 0),  # 10:00 p.m.
+    value=(time(14, 00), time(15, 15))  # Valores por defecto
 )
 
 # Convertir la hora seleccionada en un formato adecuado
@@ -33,36 +36,6 @@ chart_data_grouped = df_filtrado.groupby(['lat', 'lon', 'Nombre'])['N_MESA'].nun
 
 # Paso 2: Escalar la altura (el número de mesas distintas)
 chart_data_grouped['mesas'] = chart_data_grouped['N_MESA'] 
-
-
-terraza_del_dia = chart_data_grouped.Nombre[0]
-
-st.markdown(
-    f"""
-    <div class="hack-golden-bubble">
-        <p style="font-size: 18px; color: #333; margin: 0;">
-            🌟 La Terraza recomendada de hoy es:
-        </p>
-        <p style="font-size: 22px; font-weight: bold; color: #000; margin: 0;">
-            {terraza_del_dia}
-        </p>
-    </div>
-    <style>
-        .hack-golden-bubble {{
-            background: #edc644;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 20px 0;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%; /* Ajusta según el ancho deseado */
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 
 st.pydeck_chart(
