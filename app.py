@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 from datetime import time
-import geopandas as gpd
+# import geopandas as gpd
 
 st.title('Una silla al sol 🪑 ☀️')
 st.subheader('Encuentra una terraza en Madrid que le esté dando el Sol.')
