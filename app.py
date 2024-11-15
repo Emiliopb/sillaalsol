@@ -35,6 +35,36 @@ chart_data_grouped = df_filtrado.groupby(['lat', 'lon', 'Nombre'])['N_MESA'].nun
 chart_data_grouped['mesas'] = chart_data_grouped['N_MESA'] 
 
 
+terraza_del_dia = chart_data_grouped.Nombre[0]
+
+st.markdown(
+    f"""
+    <div class="hack-golden-bubble">
+        <p style="font-size: 18px; color: #333; margin: 0;">
+            🌟 La Terraza recomendada de hoy es:
+        </p>
+        <p style="font-size: 22px; font-weight: bold; color: #000; margin: 0;">
+            {terraza_del_dia}
+        </p>
+    </div>
+    <style>
+        .hack-golden-bubble {{
+            background: #edc644;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%; /* Ajusta según el ancho deseado */
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
